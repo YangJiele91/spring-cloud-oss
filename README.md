@@ -1,7 +1,5 @@
 # Spring Cloud Domo
 
-## 演示项目
-
 ### 已集成框架
 1. Fegin
 2. Zuul
