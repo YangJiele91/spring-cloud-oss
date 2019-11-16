@@ -20,6 +20,7 @@
 		<module>demo-producer</module>
 		<module>eureka-server</module>
 		<module>zuul</module>
+		<module>demo-common</module>
 	</modules>
 
 	<properties>
