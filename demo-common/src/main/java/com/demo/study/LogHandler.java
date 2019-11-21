@@ -3,6 +3,7 @@ package com.demo.study;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.LinkedHashMap;
 
 /**
  * 动态代理类
@@ -27,6 +28,7 @@ public class LogHandler implements InvocationHandler {
     /*InvocationHandler接口的方法，proxy表示代理，method表示原对象被调用的方法，args表示方法的参数*/
     public Object invoke(Object proxy, Method method, Object[] args)
             throws Throwable {
+        new LinkedHashMap();
         System.out.println("start-->>");
         for(int i=0;i<args.length;i++){
             System.out.println(args[i]);

@@ -7,16 +7,22 @@
 		<artifactId>spring-could-demo-parent</artifactId>
 		<version>0.0.1</version>
 	</parent>
-	
+
 	<artifactId>demo-consumer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>demo-consumer</name>
 	<description>demo-consumer</description>
 
 	<dependencies>
-	
+
+		<dependency>
+			<groupId>com.demo</groupId>
+			<artifactId>demo-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<plugins>
 			<plugin>
