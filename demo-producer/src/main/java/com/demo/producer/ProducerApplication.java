@@ -14,7 +14,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 // @EnableDiscoveryClient 使Spring Boot应用具备Feign声明式调用及负载均衡的能力 （Spring Cloud）
 @EnableFeignClients
 // @MapperScan 整合MyBatis框架用到的配置
-@MapperScan("com.demo.mapper")
+@MapperScan("com.demo.producer.mapper")
 public class ProducerApplication {
 
 	public static void main(String[] args) {

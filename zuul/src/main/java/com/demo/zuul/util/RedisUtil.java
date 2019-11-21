@@ -1,4 +1,4 @@
-package com.demo.common.util;
+package com.demo.zuul.util;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -16,9 +16,6 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * redis工具类
- *
- * @author huangwan
- * @date 2018/6/8
  **/
 @Configuration
 public class RedisUtil {

@@ -10,7 +10,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients
-@MapperScan("com.demo.mapper")
+@MapperScan("com.demo.consumer.mapper")
 public class ConsumerApplication {
 
 	public static void main(String[] args) {

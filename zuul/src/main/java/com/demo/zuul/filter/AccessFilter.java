@@ -2,7 +2,7 @@ package com.demo.zuul.filter;
 
 import com.demo.common.constant.RedisKey;
 import com.demo.common.model.LoginUser;
-import com.demo.common.util.RedisUtil;
+import com.demo.zuul.util.RedisUtil;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import org.apache.commons.lang.StringUtils;

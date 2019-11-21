@@ -3,7 +3,7 @@ package com.demo.consumer.configuration;
 import com.demo.common.annotate.CurrentUser;
 import com.demo.common.constant.RedisKey;
 import com.demo.common.model.LoginUser;
-import com.demo.common.util.RedisUtil;
+import com.demo.consumer.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
