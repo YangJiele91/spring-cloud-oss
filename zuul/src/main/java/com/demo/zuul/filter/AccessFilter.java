@@ -1,18 +1,17 @@
 package com.demo.zuul.filter;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.codec.binary.Base64;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import com.demo.constant.RedisKey;
+import com.demo.model.LoginUser;
+import com.demo.util.RedisUtil;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-
-import java.util.concurrent.*;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 资源过滤器
@@ -22,6 +21,16 @@ import java.util.concurrent.*;
 public class AccessFilter extends ZuulFilter {
 
     private static Logger logger = LoggerFactory.getLogger(AccessFilter.class);
+
+    @Autowired
+    RedisUtil redisUtil;
+
+    @Value("${notFilterUri}")
+    private String[] notFilterUri;
+    @Value("${loginExpireTime}")
+    private Long loginExpireTime;
+    @Value("${isLogin}")
+    private boolean isLogin;
 
     /**
      * 过滤器的类型 pre表示请求在路由之前被过滤
@@ -47,38 +56,47 @@ public class AccessFilter extends ZuulFilter {
      */
     @Override
     public boolean shouldFilter() {
-        return true;
+        RequestContext requestContext = RequestContext.getCurrentContext();
+        HttpServletRequest request = requestContext.getRequest();
+
+        // 登陆白名单
+        boolean result = true;
+        for (String uri : notFilterUri) {
+            if (request.getRequestURI().contains(uri)) {
+                result = false;
+            }
+        }
+
+        return result;
     }
 
     /**
-     * 过滤逻辑
+     * 系统登陆
      * @return 过滤结果
      */
     @Override
     public Object run() {
         RequestContext requestContext = RequestContext.getCurrentContext();
         HttpServletRequest request = requestContext.getRequest();
-
-        logger.info("send {} request to {}",request.getMethod(),request.getRequestURL().toString());
-
         String accessToken = request.getHeader("Authorization");
-        if (accessToken==null){
-            logger.warn("Authorization token is empty");
+
+        if (StringUtils.isBlank(accessToken)) {
             requestContext.setSendZuulResponse(false);
             requestContext.setResponseStatusCode(401);
             requestContext.setResponseBody("Authorization token is empty");
             return null;
         }
-        try {
-        	Claims claims = Jwts.parser().setSigningKey("123".getBytes("UTF-8")).parseClaimsJws(accessToken).getBody();
-        	System.out.println(claims.get("user_name"));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        logger.info("Authorization token is ok");
+
+        // 登录Token校验
+        LoginUser loginUser = redisUtil.get(RedisKey.LOGIN_USER + accessToken);
+        if(loginUser == null && isLogin){
+            requestContext.setSendZuulResponse(false);
+            requestContext.setResponseStatusCode(401);
+            requestContext.setResponseBody("Authorization token is expire");
+            return null;
+        }
+
+        redisUtil.expire(RedisKey.LOGIN_USER + accessToken, loginExpireTime);
         return null;
     }
-
-
 }
