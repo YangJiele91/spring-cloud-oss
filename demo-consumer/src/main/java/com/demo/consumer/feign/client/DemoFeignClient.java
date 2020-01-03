@@ -5,7 +5,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name="demo-service", fallback= DemoClientFallback.class)
+@FeignClient(name="demo-consumer", fallback= DemoClientFallback.class)
 public interface DemoFeignClient {
 
 	@GetMapping("/feign/getUser/{id}")
