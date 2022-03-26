@@ -22,9 +22,9 @@
 6. 项目已集成RabbitMQ，可直接参考TestRabbitSender使用 (暂未实现)
 7. 通用拦截器中已添加对外部请求参数的打印，留意项目日志。若需打印某函数方法的入参出参等信息，在方法上加注解@Log (暂未实现)
 8. 推荐Mybatis-Plus代码生成工具,代码根目录已包含Demo程序，参考文档：https://baomidou.com/pages/779a6e/
-9. 接口文档默认集成Knife4j可视化文档工具(编码规则与 Swagger 相同)，参考文档：https://doc.xiaominfo.com/knife4j/documentation/，项目启动后访问 http://xxx:port/doc.html 查看接口文档
-10. 集成JavaMelody监控平台，启动应用后访问http://xxx:8080/monitoring即可访问看到应用运行状况
-11. 集成Druid数据库监控平台，启动应用后访问微服务地址 http://xxx:port/druid 即可监控数据库运行状况
+9. 接口文档默认集成Knife4j可视化文档工具(编码规则与Swagger相同)，参考文档：https://doc.xiaominfo.com/knife4j/documentation/ ，接口文档地址： http://xxx:port/doc.html
+10. 集成JavaMelody监控平台，启动应用后访问http://xxx:8080/monitoring 
+11. 集成Druid数据库监控平台，启动应用后访问微服务地址 http://xxx:port/druid 
 12. 集成 EasyExcel 文件导出工具，参考文档: https://www.yuque.com/easyexcel/doc/write
 
 #### 使用说明
