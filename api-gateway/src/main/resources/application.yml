@@ -1,0 +1,26 @@
+server:
+  port: 9000
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    gateway:
+      discovery:
+        locator:
+          enabled: true #表明gateway开启服务注册和发现的功能，并且spring cloud gateway自动根据服务发现为每一个服务创建了一个router，这个router将以服务名开头的请求路径转发到对应的服务。
+          lower-case-service-id: true #是将请求路径上的服务名配置为小写（因为服务注册的时候，向注册中心注册时将服务名转成大写的了），比如以/service-hi/*的请求路径被路由转发到服务名为service-hi的服务上。
+      routes:
+#        - id: data-service
+#          uri: lb://data-service #此配置的值注册到Nacos中服务提供者的spring.application.name的值
+#          predicates:
+#            - Path=/data/**
+        - id: nacos  # Nacos注册中心
+          uri: http://127.0.0.1:8848/nacos/
+          predicates:
+            - Path=/nacos/**
+          filters:
+            - PreserveHostHeader
+notFilterUri:
+loginExpireTime: 1800
+isLogin: true
