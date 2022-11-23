@@ -9,7 +9,9 @@ import com.oss.common.exception.XXException;
  */
 public enum ExceptionCode implements IExceptionCode {
 
-    UNKNOWN_ERROR(9999, "未知异常");
+    UNKNOWN_ERROR(9999, "未知异常"),
+    USER_NOT_EXIST(1001, "用户不存在"),
+    PASSWORD_INVALID(1002, "密码错误");
 
     private final int code;
     private final String message;

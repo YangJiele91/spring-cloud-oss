@@ -1,6 +1,11 @@
 server:
   port: 9000
 spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    database: 0
   cloud:
     nacos:
       discovery:
@@ -21,6 +26,6 @@ spring:
             - Path=/nacos/**
           filters:
             - PreserveHostHeader
-notFilterUri:
+notFilterUri: /user/login,/monitoring,/druid
 loginExpireTime: 1800
 isLogin: true
